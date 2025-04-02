@@ -10,7 +10,7 @@ export default function TodoList() {
   useEffect(() => {
     const fetchTasks = async () => {
       try {
-        const response = await fetch("http://localhost:5000/tasks");
+        const response = await fetch("https://todo-app-r04r.onrender.com");
         if (!response.ok) throw new Error("Failed to fetch tasks");
         const data = await response.json();
         setTasks(data);
@@ -26,7 +26,7 @@ export default function TodoList() {
     if (newTask.trim() === "") return;
 
     try {
-      const response = await fetch("http://localhost:5000/tasks", {
+      const response = await fetch("https://todo-app-r04r.onrender.com", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ text: newTask, completed: false }),
@@ -44,7 +44,7 @@ export default function TodoList() {
 
   const toggleTask = async (index, id) => {
     try {
-      const response = await fetch(`http://localhost:5000/tasks/toggle/${id}`, {
+      const response = await fetch(`https://todo-app-r04r.onrender.com/toggle/${id}`, {
         method: "PUT",
       });
 
@@ -59,7 +59,7 @@ export default function TodoList() {
 
   const removeTask = async (index, id) => {
     try {
-      await fetch(`http://localhost:5000/tasks/${id}`, { method: "DELETE" });
+      await fetch(`https://todo-app-r04r.onrender.com/${id}`, { method: "DELETE" });
       setTasks(tasks.filter((_, i) => i !== index));
     } catch (error) {
       console.error("Error deleting task:", error);
@@ -73,7 +73,7 @@ export default function TodoList() {
 
   const saveEdit = async (index, id) => {
     try {
-      const response = await fetch(`http://localhost:5000/tasks/${id}`, {
+      const response = await fetch(`https://todo-app-r04r.onrender.com/${id}`, {
         method: "PUT",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ text: editedTask }),
